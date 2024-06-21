@@ -12,6 +12,16 @@ class _HomePageState extends State<HomePage> {
   var descController = TextEditingController();
 
   List<NoteModel> listNotes = [];
+  List<String> listWeekDays = [
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun',
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,24 +38,43 @@ class _HomePageState extends State<HomePage> {
           var createdAtweekday = time.weekday;
           var createdAtTime = '${time.hour}:${time.minute}';
 
-    return Column(
-    children: [
-    ListTile(
-      trailing: Container(
-        child: Column(
-          children: [
-            Text(createdAtweekday.toString()),
-            Text(createdAtDate.toString(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Card(
+        child:Padding(
+          padding: const EdgeInsets.all(8.0
         ),
-      ),
-      title: Text(listNotes[index].title),
-      subtitle: Text(createdAtTime),
-    ),
-      Text((listNotes[index].desc))
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        ListTile(
+          leading: Container(
+            width: 65,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7),
+              color: Colors.purple.withOpacity(0.1)
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(listWeekDays[createdAtweekday-1]),
+                Text(createdAtDate.toString(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
 
-    ],
+              ],
+            ),
+          ),
+          title: Text(listNotes[index].title),
+          subtitle: Text(createdAtTime),
+        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Text((listNotes[index].desc)),
+          )
+
+        ],
+        ),
+        ),
+        ),
     );
     }) :Center(child: Text('No Notes!!', style: TextStyle(fontSize: 21),),
       ),
